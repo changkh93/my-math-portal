@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>✨ 스스로Math: AI와 함께하는 중등수학 ✨</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* === CSS 코드 시작 === */
+
+      :root {
+        /* 색상 변수화로 일관성 및 유지보수성 향상 */
+        --primary-color: #0077b6; /* 신뢰감을 주는 메인 블루 */
+        --secondary-color: #00b4d8; /* 시원하고 활기찬 보조 블루 */
+        --accent-color: #ff8a65; /* 주의를 끄는 따뜻한 포인트 색상 */
+        --bg-gradient-start: #e0f7fa; /* 은은한 하늘색 */
+        --bg-gradient-end: #b2ebf2; /* 부드러운 청록색 */
+        --text-color-dark: #2c3e50; /* 기본 텍스트 */
+        --text-color-light: #576b81; /* 보조 텍스트 */
+        --card-bg-color: rgba(255, 255, 255, 0.9); /* 카드 배경 (반투명) */
+        --white-color: #ffffff;
+      }
+
+      /* 기본 스타일 및 폰트 설정 */
+      body {
+        font-family: "Poppins", "Noto Sans KR", sans-serif;
+        /* 시원하고 부드러운 그라데이션 배경 */
+        background: linear-gradient(
+          135deg,
+          var(--bg-gradient-start) 0%,
+          var(--bg-gradient-end) 100%
+        );
+        background-attachment: fixed; /* 스크롤 시 배경 고정 */
+        margin: 0;
+        padding: 40px 20px; /* 상하 여백 증가, 좌우 여백 확보 */
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* 컨텐츠가 길어질 경우를 대비해 상단 정렬 */
+        min-height: 100vh;
+        color: var(--text-color-dark);
+        overflow-x: hidden;
+      }
+
+      .container {
+        background: var(--card-bg-color);
+        padding: 50px;
+        border-radius: 30px; /* 더 부드러운 곡선 */
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        /* 깊이감 있는 부드러운 그림자 효과 */
+        box-shadow: 0 16px 40px rgba(45, 100, 150, 0.15);
+        backdrop-filter: blur(
+          10px
+        ); /* 배경을 비치게 하는 블러 효과 (모던한 느낌) */
+        text-align: center;
+        max-width: 900px;
+        width: 100%;
+        opacity: 0;
+        animation: containerFadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        animation-delay: 0.1s;
+      }
+
+      @keyframes containerFadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* 헤더 스타일 */
+      header .main-title {
+        color: var(--primary-color);
+        font-size: 3em; /* 타이틀 강조 */
+        margin-bottom: 10px;
+        font-weight: 700;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      header .subtitle {
+        color: var(--secondary-color);
+        font-size: 1.4em;
+        margin-bottom: 25px;
+        font-weight: 600;
+      }
+
+      header .greeting-text {
+        color: var(--accent-color); /* 포인트 색상으로 변경 */
+        font-size: 1.25em;
+        font-weight: 500; /* 굵기 살짝 조정 (Noto Sans KR 기준) */
+        margin-bottom: 40px;
+        min-height: 1.5em;
+        transition: all 0.3s ease;
+      }
+
+      /* 링크 섹션 스타일 */
+      .link-section .section-title {
+        color: var(--text-color-dark);
+        margin-bottom: 35px;
+        font-size: 2em;
+        font-weight: 700;
+        /* 그라데이션 언더라인으로 포인트 */
+        background-image: linear-gradient(
+          to top,
+          rgba(0, 180, 216, 0.3),
+          rgba(0, 180, 216, 0.3)
+        );
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        background-size: 100% 40%; /* 밑줄 두께 및 위치 조정 */
+        display: inline; /* 텍스트 길이에 맞게 밑줄 적용 */
+        padding-bottom: 5px;
+      }
+
+      .links-grid {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(280px, 1fr)
+        ); /* 반응형 그리드 */
+        gap: 35px; /* 카드 사이 간격 증가 */
+        margin-top: 20px;
+      }
+
+      .link-card {
+        background: var(--white-color);
+        color: var(--text-color-light);
+        padding: 40px 30px;
+        text-decoration: none;
+        border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 10px 25px rgba(128, 145, 255, 0.1);
+        border: 2px solid transparent;
+        min-height: 200px;
+        text-align: center;
+        opacity: 0;
+        animation: linkCardFadeInScaleUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1)
+          forwards;
+      }
+
+      @keyframes linkCardFadeInScaleUp {
+        from {
+          opacity: 0;
+          transform: scale(0.9) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .link-card:hover,
+      .link-card:focus {
+        /* 접근성 향상을 위해 focus 상태에도 호버 효과 적용 */
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 119, 182, 0.2);
+        border-color: var(--secondary-color);
+        outline: none; /* 포커스 시 기본 아웃라인 제거 */
+      }
+
+      .link-card .emoji {
+        font-size: 3.5em; /* 이모지 크기 증가 */
+        margin-bottom: 20px;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        transition: transform 0.3s ease;
+      }
+
+      .link-card:hover .emoji {
+        transform: scale(1.1) rotate(-5deg); /* 호버 시 이모지 동적 효과 */
+      }
+
+      .link-card .link-text {
+        font-size: 1.4em;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+
+      .link-card .description {
+        font-size: 1em;
+        line-height: 1.6;
+      }
+
+      /* 푸터 스타일 */
+      footer {
+        margin-top: 60px;
+        font-size: 0.9em;
+        color: var(--text-color-light);
+        opacity: 0.8;
+      }
+
+      /* 반응형 디자인 */
+      @media (max-width: 960px) {
+        .container {
+          padding: 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 30px 15px;
+        }
+        .container {
+          padding: 30px 25px;
+        }
+        header .main-title {
+          font-size: 2.5em;
+        }
+        header .subtitle {
+          font-size: 1.2em;
+        }
+        .link-section .section-title {
+          font-size: 1.7em;
+        }
+        .links-grid {
+          gap: 25px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 20px 10px;
+        }
+        .container {
+          padding: 25px 20px;
+        }
+        header .main-title {
+          font-size: 2.1em;
+        }
+        header .subtitle {
+          font-size: 1.1em;
+        }
+        header .greeting-text {
+          font-size: 1.1em;
+        }
+        /* 모바일에서는 그리드 컬럼 수를 1로 고정하지 않고, auto-fit이 자연스럽게 처리하도록 둡니다.
+           minmax(280px, 1fr) 설정 덕분에 화면이 좁아지면 자동으로 1열이 됩니다. */
+        .links-grid {
+          gap: 20px;
+        }
+        .link-card {
+          padding: 30px 25px;
+        }
+      }
+      /* === CSS 코드 끝 === */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1 class="main-title">✨ 스스로Math ✨</h1>
+        <p class="subtitle">AI와 함께 중등 수학, 쉽고 재미있게 정복해요! 🚀</p>
+        <p id="greeting" class="greeting-text"></p>
+      </header>
+
+      <main class="link-section">
+        <h2 class="section-title">학습 바로가기</h2>
+        <div class="links-grid">
+          <a
+            href="https://sites.google.com/dulcine.net/01print/home/classroom/mm"
+            target="_blank"
+            class="link-card"
+          >
+            <span class="emoji">📊</span>
+            <span class="link-text">진도 현황판</span>
+            <span class="description">나의 학습 진행 상황을 한눈에!</span>
+          </a>
+          <a
+            href="https://docs.google.com/document/d/18F1JfQa6-rXPiipw3hmB71xiLHRpxSG44Z6EI6tuwZI/edit?usp=sharing"
+            target="_blank"
+            class="link-card"
+          >
+            <span class="emoji">📝</span>
+            <span class="link-text">우리 모두의 개념 노트</span>
+            <span class="description">함께 만들고 공유하는 핵심 개념</span>
+          </a>
+          <a
+            href="https://sites.google.com/dulcine.net/math/prime01"
+            target="_blank"
+            class="link-card"
+          >
+            <span class="emoji">🖱️</span>
+            <span class="link-text">Click Math</span>
+            <span class="description">재미있는 인터랙티브 수학 문제</span>
+          </a>
+          <a
+            href="https://sites.google.com/dulcine.net/book-quiz/quiz/middle_test"
+            target="_blank"
+            class="link-card"
+          >
+            <span class="emoji">🏆</span>
+            <span class="link-text">랭킹과 성취</span>
+            <span class="description">나의 순위와 달성 목표 확인</span>
+          </a>
+
+          <a
+            href="https://daily-planner-1865e.web.app/"
+            target="_blank"
+            class="link-card"
+          >
+            <span class="emoji">🎯</span>
+            <span class="link-text">일정-목표 관리</span>
+            <span class="description"
+              >매일의 학습 계획을 세우고 꾸준함을 내 것으로!</span
+            >
+          </a>
+        </div>
+      </main>
+
+      <footer>
+        <p>© 2025 스스로Math. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script>
+      // === JavaScript 코드 시작 ===
+      document.addEventListener("DOMContentLoaded", function () {
+        // 시간대별 인사말 기능 (내용은 동일, 스타일은 CSS에서 관리)
+        const greetingElement = document.getElementById("greeting");
+        if (greetingElement) {
+          const currentHour = new Date().getHours();
+          let greetingText = "";
+
+          if (currentHour >= 5 && currentHour < 12) {
+            greetingText = "🌞 좋은 아침! 오늘도 수학 에너지 UP!";
+          } else if (currentHour >= 12 && currentHour < 18) {
+            greetingText = "☀️ 점심 먹고 수학 집중 타임! 화이팅!";
+          } else if (currentHour >= 18 && currentHour < 22) {
+            greetingText = "🌙 저녁엔 차분히 복습! 개념을 내 것으로 만들어요.";
+          } else {
+            greetingText = "⭐ 늦은 밤, 꾸준함이 실력! 푹 쉬고 내일 만나요.";
+          }
+          greetingElement.textContent = greetingText;
+        }
+
+        // 링크 카드 등장 애니메이션 지연 설정
+        const linkCards = document.querySelectorAll(".link-card");
+        linkCards.forEach((card, index) => {
+          card.style.animationDelay = `${index * 0.1 + 0.5}s`; // 간격을 줄여 더 빠르고 경쾌하게 등장
+        });
+      });
+      // === JavaScript 코드 끝 ===
+    </script>
+  </body>
+</html>
